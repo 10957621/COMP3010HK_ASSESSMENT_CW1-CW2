@@ -1,4 +1,4 @@
-##Zui  Queries
+## Zui  Queries
 
 ### 1. Victim Identification
 **Goal:** Identify the victim's IP, MAC address, and Hostname.
