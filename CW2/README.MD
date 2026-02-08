@@ -23,7 +23,10 @@ This case illustrates that without CloudTrail and Splunk monitoring, and without
 
 
 ## 3. Installation & Data Preparation
-*Describe how you set up the environment.*
+For the SOC infrastructure, an Ubuntu 22.04.5 virtual machine was deployed on a Windows host, and Splunk Enterprise 10.0.2 was installed on this VM for the investigation. This setup emulates a typical SOC architecture where a dedicated Linux server hosts the SIEM platform.
+Using a VM-based Splunk deployment provides a controllable and isolated environment, separating security log analysis from the local operating system. This aligns with SOC best practices, where critical monitoring components are hosted on dedicated infrastructure rather than analyst workstations. In this lab, Splunk acts as the central SIEM, responsible for receiving, indexing, and querying security events, effectively covering both the data receiver and data enquiry roles.
+
+The following sections describe the VM installation steps and data preparation process in detail.
 *   **OS:** Ubuntu Linux
 *   **SIEM:** Splunk Enterprise
 *   **Data:** BOTSv3 Dataset
