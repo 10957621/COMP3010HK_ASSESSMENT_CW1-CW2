@@ -32,64 +32,53 @@ The following sections describe the VM installation steps and data preparation p
 *   **Data:** BOTSv3 Dataset
 
 ### Installation Evidence
-![Figure 3.1](Installation%20&%20Data%20Preparation/01.jpg)  
 
 **Figure 3.1:** Configure the VM name and select the Ubuntu ISO image  
+![Figure 3.1](Installation%20&%20Data%20Preparation/01.jpg)  
 
-
-![Figure 3.2](Installation%20&%20Data%20Preparation/02.jpg)  
 
 **Figure 3.2:** Configure the VM username and password  
+![Figure 3.2](Installation%20&%20Data%20Preparation/02.jpg)  
 
-
-![Figure 3.3](Installation%20&%20Data%20Preparation/03.jpg)  
 
 **Figure 3.3:** Allocate sufficient processors, RAM, and disk space to the VM  
+![Figure 3.3](Installation%20&%20Data%20Preparation/03.jpg)  
 
-
-![Figure 3.4](Installation%20&%20Data%20Preparation/04.jpg)  
 
 **Figure 3.4:** Log in to the Ubuntu VM  
+![Figure 3.4](Installation%20&%20Data%20Preparation/04.jpg)  
 
-
-![Figure 3.5](Installation%20&%20Data%20Preparation/05.jpg)  
 
 **Figure 3.5:** Configure VirtualBox shared folders for file transfer  
+![Figure 3.5](Installation%20&%20Data%20Preparation/05.jpg)  
 
-
-![Figure 3.6](Installation%20&%20Data%20Preparation/06.jpg)  
 
 **Figure 3.6:** Mount the shared folder in the VM and verify its contents  
+![Figure 3.6](Installation%20&%20Data%20Preparation/06.jpg)  
 
-
-![Figure 3.7](Installation%20&%20Data%20Preparation/07.jpg)  
 
 **Figure 3.7:** Verify that the Splunk package is suitable for installation using `dpkg`  
+![Figure 3.7](Installation%20&%20Data%20Preparation/07.jpg)  
 
-
-![Figure 3.8](Installation%20&%20Data%20Preparation/08.jpg)  
 
 **Figure 3.8:** Install Splunk Enterprise and create the administrator profile  
+![Figure 3.8](Installation%20&%20Data%20Preparation/08.jpg)  
 
-
-![Figure 3.9](Installation%20&%20Data%20Preparation/09.jpg)  
 
 **Figure 3.9:** Start the Splunk service  
+![Figure 3.9](Installation%20&%20Data%20Preparation/09.jpg)  
 
-
-![Figure 3.10](Installation%20&%20Data%20Preparation/10.jpg)  
 
 **Figure 3.10:** Import the BOTSv3 dataset into Splunk  
+![Figure 3.10](Installation%20&%20Data%20Preparation/10.jpg)  
 
-
-![Figure 3.11](Installation%20&%20Data%20Preparation/11.jpg)  
 
 **Figure 3.11:** Verify that the BOTSv3 dataset was successfully ingested  
+![Figure 3.11](Installation%20&%20Data%20Preparation/11.jpg)  
 
-
-![Figure 3.12](Installation%20&%20Data%20Preparation/12.jpg)  
 
 **Figure 3.12:** Log in to Splunk and run an initial search on the BOTSv3 index  
+![Figure 3.12](Installation%20&%20Data%20Preparation/12.jpg)  
 
 In this environment, the query index=botsv3 earliest=0 | stats count by sourcetype shows that the botsv3 index contains 107 sourcetypes, including critical ones such as aws:cloudtrail and winhostmon. This confirms that both key cloud audit logs and host telemetry are available for the subsequent SOC investigation.
 
