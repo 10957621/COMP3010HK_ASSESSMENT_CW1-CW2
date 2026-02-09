@@ -39,6 +39,25 @@ The following sections describe the VM installation steps and data preparation p
 
 ![Figure 3.2](Installation%20&%20Data%20Preparation/02.jpg)
 
+![Figure 3.3](Installation%20&%20Data%20Preparation/03.jpg)
+
+![Figure 3.4](Installation%20&%20Data%20Preparation/04.jpg)
+
+![Figure 3.5](Installation%20&%20Data%20Preparation/05.jpg)
+
+![Figure 3.6](Installation%20&%20Data%20Preparation/06.jpg)
+
+![Figure 3.7](Installation%20&%20Data%20Preparation/07.jpg)
+
+![Figure 3.8](Installation%20&%20Data%20Preparation/08.jpg)
+
+![Figure 3.9](Installation%20&%20Data%20Preparation/09.jpg)
+
+![Figure 3.10](Installation%20&%20Data%20Preparation/10.jpg)
+
+![Figure 3.11](Installation%20&%20Data%20Preparation/11.jpg)
+
+![Figure 3.12](Installation%20&%20Data%20Preparation/12.jpg)
 
 ## 4. Guided Questions Analysis
 *Here is the evidence for the Quiz questions.*
