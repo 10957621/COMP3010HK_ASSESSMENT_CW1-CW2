@@ -35,9 +35,9 @@ The following sections describe the VM installation steps and data preparation p
 ![Splunk Installation](splunk_install.png)
 *Figure 1: Splunk running on my Ubuntu VM.*
 
-![Figure 3.1](Installation%20&%20Data%20Preparation/1.png)
+![Figure 3.1](Installation%20&%20Data%20Preparation/01.png)
 
-![Figure 3.1](Installation%20&%20Data%20Preparation/2.png)
+![Figure 3.2](Installation%20&%20Data%20Preparation/02.png)
 
 
 ## 4. Guided Questions Analysis
