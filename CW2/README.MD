@@ -105,3 +105,17 @@ In a production environment, incident analysis typically begins with an automate
 
 The objective of this section is to conduct a forensic investigation using Splunk to determine the full scope of the incident. This includes identifying the trigger point, tracking the suspect via Identity & Access Management (IAM), assessing the scope of impact which is public data exposure, and capturing infrastructure evidence to support remediation.
 
+### Question 1: Identifying IAM Users
+
+The investigation began by identify who exists in the environment  queried CloudTrail logs to list all unique user identities to understand who exists in the environment.
+
+**Splunk Query:** splunk index=botsv3 sourcetype="aws:cloudtrail" userIdentity.type="IAMUser" | stats count by userIdentity.userName
+**Figure 4.1:** 
+![Figure 4.1](Quiz/Q1.jpg)
+
+The IAM users identified are: 
+bstoll, byun, Splunk_sccess, web_admin
+
+In SOC environment, any account found here that does not map to a current list would be flagged for immediate disablement.
+
+
