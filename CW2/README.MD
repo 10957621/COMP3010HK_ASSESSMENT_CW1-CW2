@@ -109,8 +109,8 @@ The objective of this section is to conduct a forensic investigation using Splun
 
 The investigation began by identify who exists in the environment  queried CloudTrail logs to list all unique user identities to understand who exists in the environment.
 
-**Splunk Query:** splunk index=botsv3 sourcetype="aws:cloudtrail" userIdentity.type="IAMUser" | stats count by userIdentity.userName
-**Figure 4.1:** 
+**Splunk Query:**  index=botsv3 sourcetype="aws:cloudtrail" userIdentity.type="IAMUser" | stats count by userIdentity.userName
+**Figure 4.1** 
 ![Figure 4.1](Quiz/Q1.jpg)
 
 The IAM users identified are: 
@@ -118,4 +118,21 @@ bstoll, byun, Splunk_sccess, web_admin
 
 In SOC environment, any account found here that does not map to a current list would be flagged for immediate disablement.
 
+### Question 2: Multi-Factor Authentication Check
+
+After identify who exists in the environment drilled down into the JSON of the CloudTrail logs to check the status of Multi-Factor Authentication (MFA) Status.
+
+The specific JSON path used to identify non-MFA sessions is: userIdentity.sessionContext.attributes.mfaAuthenticated.
+
+**Figure 4.2.1** 
+![Figure 4.2.1](Quiz/Q2.1.jpg)
+
+**Splunk Query:**
+
+The Figure 4.2.1 is showing  the  MFA status as false, and though the query Figure 4.2.2 show the all the user who the MFA status as false and count by descending.
+
+**Figure 4.2.2** 
+![Figure 4.2.2](Quiz/Q2.2.jpg)
+
+In a production SOC, lack of MFA on administrative accounts is a critical vulnerability. Alerts should be configured to trigger immediately if a privileged user logs in without MFA tokens.
 
