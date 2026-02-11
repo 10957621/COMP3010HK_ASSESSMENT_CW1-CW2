@@ -47,52 +47,41 @@ The following sections describe the VM installation steps and data preparation p
 
 ### Installation Evidence
 
+![Figure 3.1](Installation%20&%20Data%20Preparation/01.jpg)\
 **Figure 3.1:** Configure the VM name and select the Ubuntu ISO image  
-![Figure 3.1](Installation%20&%20Data%20Preparation/01.jpg)  
+  
+![Figure 3.2](Installation%20&%20Data%20Preparation/02.jpg)\
+**Figure 3.2:** Configure the VM username and password
+  
+![Figure 3.3](Installation%20&%20Data%20Preparation/03.jpg)\
+**Figure 3.3:** Allocate sufficient processors, RAM, and disk space to the VM
 
-
-**Figure 3.2:** Configure the VM username and password  
-![Figure 3.2](Installation%20&%20Data%20Preparation/02.jpg)  
-
-
-**Figure 3.3:** Allocate sufficient processors, RAM, and disk space to the VM  
-![Figure 3.3](Installation%20&%20Data%20Preparation/03.jpg)  
-
-
+![Figure 3.4](Installation%20&%20Data%20Preparation/04.jpg)\  
 **Figure 3.4:** Login to the Ubuntu VM  
-![Figure 3.4](Installation%20&%20Data%20Preparation/04.jpg)  
-
-
-**Figure 3.5:** Configure VirtualBox shared folders for file transfer  
-![Figure 3.5](Installation%20&%20Data%20Preparation/05.jpg)  
-
-
-**Figure 3.6:** Mount the shared folder in the VM and verify its contents  
-![Figure 3.6](Installation%20&%20Data%20Preparation/06.jpg)  
-
-
-**Figure 3.7:** Verify that the Splunk package is suitable for installation using `dpkg`  
-![Figure 3.7](Installation%20&%20Data%20Preparation/07.jpg)  
-
-
-**Figure 3.8:** Install Splunk Enterprise and create the administrator profile  
-![Figure 3.8](Installation%20&%20Data%20Preparation/08.jpg)  
-
-
-**Figure 3.9:** Start the Splunk service  
-![Figure 3.9](Installation%20&%20Data%20Preparation/09.jpg)  
-
-
-**Figure 3.10:** Import the BOTSv3 dataset into Splunk  
-![Figure 3.10](Installation%20&%20Data%20Preparation/10.jpg)  
-
-
-**Figure 3.11:** Verify that the BOTSv3 dataset was successfully ingested  
-![Figure 3.11](Installation%20&%20Data%20Preparation/11.jpg)  
-
-
-**Figure 3.12:** Log in to Splunk and run an initial search on the BOTSv3 index  
-![Figure 3.12](Installation%20&%20Data%20Preparation/12.jpg)  
+ 
+![Figure 3.5](Installation%20&%20Data%20Preparation/05.jpg)\
+**Figure 3.5:** Configure VirtualBox shared folders for file transfer 
+  
+![Figure 3.6](Installation%20&%20Data%20Preparation/06.jpg)\  
+**Figure 3.6:** Mount the shared folder in the VM and verify its contents
+  
+![Figure 3.7](Installation%20&%20Data%20Preparation/07.jpg)\  
+**Figure 3.7:** Verify that the Splunk package is suitable for installation using `dpkg`
+ 
+![Figure 3.8](Installation%20&%20Data%20Preparation/08.jpg)\
+**Figure 3.8:** Install Splunk Enterprise and create the administrator profile 
+  
+![Figure 3.9](Installation%20&%20Data%20Preparation/09.jpg)\
+**Figure 3.9:** Start the Splunk service
+  
+![Figure 3.10](Installation%20&%20Data%20Preparation/10.jpg)\  
+**Figure 3.10:** Import the BOTSv3 dataset into Splunk
+ 
+![Figure 3.11](Installation%20&%20Data%20Preparation/11.jpg)\
+**Figure 3.11:** Verify that the BOTSv3 dataset was successfully ingested 
+  
+![Figure 3.12](Installation%20&%20Data%20Preparation/12.jpg)\
+**Figure 3.12:** Log in to Splunk and run an initial search on the BOTSv3 index
 
 ### Data Validation
 In this environment, the validation query index=botsv3 earliest=0 | stats count by sourcetype shows that the botsv3 index contains 107 sourcetypes, including critical ones such as aws:cloudtrail and winhostmon. This confirms that both key cloud audit logs and host telemetry are available for the subsequent SOC investigation. From a SOC perspective, validating sourcetype coverage, event volumes, and field extraction is a critical onboarding step before building detections and dashboards on top of a new data source.
@@ -109,14 +98,14 @@ The objective of this section is to conduct a forensic investigation using Splun
 
 The investigation began by identify who exists in the environment  queried CloudTrail logs to list all unique user identities to understand who exists in the environment.
 
-**Splunk Query:**  
+**Splunk Query:**\  
+index=botsv3 sourcetype="aws:cloudtrail" userIdentity.type="IAMUser" 
+| stats count by userIdentity.userName
 
-index=botsv3 sourcetype="aws:cloudtrail" userIdentity.type="IAMUser" | stats count by userIdentity.userName
-
+![Figure 4.1](Quiz/Q1.jpg)\
 **Figure 4.1** 
-![Figure 4.1](Quiz/Q1.jpg)
 
-The IAM users identified are: 
+The IAM users identified are:\ 
 bstoll, btun, splunk_access, web_admin
 
 In SOC environment, any account found here that does not map to a current list would be flagged for immediate disablement.
@@ -127,10 +116,10 @@ After identify who exists in the environment drilled down into the JSON of the C
 
 The specific JSON path used to identify non-MFA sessions is: **userIdentity.sessionContext.attributes.mfaAuthenticated**.
 
+![Figure 4.2.1](Quiz/Q2.1.jpg)\
 **Figure 4.2.1** 
-![Figure 4.2.1](Quiz/Q2.1.jpg)
 
-**Splunk Query:**
+**Splunk Query:**\
 index=botsv3 source="aws:cloudtrail" 
 | spath output=mfa_status path=userIdentity.sessionContext.attributes.mfaAuthenticated
 | search mfa_status=false
@@ -139,7 +128,7 @@ index=botsv3 source="aws:cloudtrail"
 
 The Figure 4.2.1 is showing  the  MFA status as false, and though the query Figure 4.2.2 show the all the user who the MFA status as false and count by descending.
 
+![Figure 4.2.2](Quiz/Q2.2.jpg)\
 **Figure 4.2.2** 
-![Figure 4.2.2](Quiz/Q2.2.jpg)
 
 In a production SOC, lack of MFA on administrative accounts is a critical vulnerability. Alerts should be configured to trigger immediately if a privileged user logs in without MFA tokens.
