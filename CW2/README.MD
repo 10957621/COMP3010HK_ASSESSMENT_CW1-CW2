@@ -89,3 +89,8 @@ While this all‑in‑one Splunk deployment on a single Ubuntu VM is sufficient 
 ## 4. Guided Questions Analysis
 *Here is the evidence for the Quiz questions.*
 
+
+In a production environment, incident analysis typically begins with an automated alert. This report adopts the persona of a Tier 2 SOC Analyst at **Frothly** who has received a ticket regarding suspicious configuration changes within the organization's Amazon AWS cloud infrastructure.
+
+The objective of this section is to conduct a forensic investigation using Splunk to determine the full scope of the incident. This includes identifying the trigger point, tracking the suspect via Identity & Access Management (IAM), assessing the scope of impact which is public data exposure, and capturing infrastructure evidence to support remediation.
+
