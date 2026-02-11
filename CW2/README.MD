@@ -28,7 +28,7 @@ In this incident, several preventive controls should have been in place, includi
 ### Detection & Response
 With proper prevention and monitoring, Tier 1 and Tier 2 could use CloudTrail, S3 access logs, and winhostmon data to quickly detect that a bucket had been made public and that an endpoint was behaving abnormally.
 
-*   **Tier 2 Responsibility:** Once the incident is confirmed, Tier 2 could responsible for response actions such as isolating affected resources, revoking or rolling back risky access controls, notifying the relevant owners, and documenting findings and actions. 
+*   **Tier 2 Responsibility:** Once the incident is confirmed, Tier 2 is responsible for response actions such as isolating affected resources, revoking or rolling back risky access controls, notifying the relevant owners, and documenting findings and actions. 
 
 *   **Tier 3 Responsibility:** Tier 3 then uses this report as input for the recovery and improvement phase, ensuring that new access controls are fully implemented and that lessons learned are translated into updated security policies, detection rules, and playbooks. 
 
@@ -59,7 +59,7 @@ The following sections describe the VM installation steps and data preparation p
 ![Figure 3.3](Installation%20&%20Data%20Preparation/03.jpg)  
 
 
-**Figure 3.4:** Log in to the Ubuntu VM  
+**Figure 3.4:** Login to the Ubuntu VM  
 ![Figure 3.4](Installation%20&%20Data%20Preparation/04.jpg)  
 
 
@@ -117,7 +117,7 @@ index=botsv3 sourcetype="aws:cloudtrail" userIdentity.type="IAMUser" | stats cou
 ![Figure 4.1](Quiz/Q1.jpg)
 
 The IAM users identified are: 
-bstoll, byun, Splunk_sccess, web_admin
+bstoll, btun, splunk_access, web_admin
 
 In SOC environment, any account found here that does not map to a current list would be flagged for immediate disablement.
 
