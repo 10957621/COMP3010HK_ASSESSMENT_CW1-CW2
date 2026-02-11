@@ -125,13 +125,12 @@ In SOC environment, any account found here that does not map to a current list w
 
 After identify who exists in the environment drilled down into the JSON of the CloudTrail logs to check the status of Multi-Factor Authentication (MFA) Status.
 
-The specific JSON path used to identify non-MFA sessions is: userIdentity.sessionContext.attributes.mfaAuthenticated.
+The specific JSON path used to identify non-MFA sessions is: **userIdentity.sessionContext.attributes.mfaAuthenticated**.
 
 **Figure 4.2.1** 
 ![Figure 4.2.1](Quiz/Q2.1.jpg)
 
 **Splunk Query:**
-
 index=botsv3 source="aws:cloudtrail" 
 | spath output=mfa_status path=userIdentity.sessionContext.attributes.mfaAuthenticated
 | search mfa_status=false
@@ -144,4 +143,3 @@ The Figure 4.2.1 is showing  the  MFA status as false, and though the query Figu
 ![Figure 4.2.2](Quiz/Q2.2.jpg)
 
 In a production SOC, lack of MFA on administrative accounts is a critical vulnerability. Alerts should be configured to trigger immediately if a privileged user logs in without MFA tokens.
-
