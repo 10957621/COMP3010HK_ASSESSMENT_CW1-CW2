@@ -109,7 +109,10 @@ The objective of this section is to conduct a forensic investigation using Splun
 
 The investigation began by identify who exists in the environment  queried CloudTrail logs to list all unique user identities to understand who exists in the environment.
 
-**Splunk Query:**  index=botsv3 sourcetype="aws:cloudtrail" userIdentity.type="IAMUser" | stats count by userIdentity.userName
+**Splunk Query:**  
+
+index=botsv3 sourcetype="aws:cloudtrail" userIdentity.type="IAMUser" | stats count by userIdentity.userName
+
 **Figure 4.1** 
 ![Figure 4.1](Quiz/Q1.jpg)
 
@@ -128,6 +131,12 @@ The specific JSON path used to identify non-MFA sessions is: userIdentity.sessio
 ![Figure 4.2.1](Quiz/Q2.1.jpg)
 
 **Splunk Query:**
+
+index=botsv3 source="aws:cloudtrail" 
+| spath output=mfa_status path=userIdentity.sessionContext.attributes.mfaAuthenticated
+| search mfa_status=false
+| stats count by userIdentity.userName
+| sort - count
 
 The Figure 4.2.1 is showing  the  MFA status as false, and though the query Figure 4.2.2 show the all the user who the MFA status as false and count by descending.
 
