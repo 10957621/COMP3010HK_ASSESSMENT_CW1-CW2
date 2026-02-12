@@ -179,5 +179,5 @@ In Figure 4.4.1, the query lists all eventName="PutBucketAcl" events where the g
 
 When drilling down into the JSON event under requestParameters, there are two grantees. For each grantee, the uri is set to AllUsers, and the permissions are set to READ and WRITE (with xsi:type set to Group). This indicates that the event configured the S3 bucket ACL to be public accessible by everyone.
 
-In the same JSON event shown in Figures 4.5.1 and 4.6.1, the configuration applies to the bucketName: **"frothlywebcode"** and the userName: **"bstoll"**. This indicates that on **"2018-08-20 at 12:18:44"**, user bstoll configured the frothlywebcode bucket, resulting in it being accessible by everyone.
+In the same JSON event shown in Figures 4.5.1 and 4.6.1, the configuration applies to the bucketName: **"frothlywebcode"** and the userName: **"bstoll"**. This indicates that on **"2018-08-20 at 13:01:46"**, user bstoll configured the frothlywebcode bucket, resulting in it being accessible by everyone.
 
