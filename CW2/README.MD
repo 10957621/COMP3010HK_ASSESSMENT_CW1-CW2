@@ -132,3 +132,28 @@ The Figure 4.2.1 is showing  the  MFA status as false, and though the query Figu
 **Figure 4.2.2** 
 
 In a production SOC, lack of MFA on administrative accounts is a critical vulnerability. Alerts should be configured to trigger immediately if a privileged user logs in without MFA tokens.
+
+### Question 3: Hardware Inventory
+
+After identifying who can access this environment, the second step is to identify the web servers' hardware specifications for asset inventory. This pivots to WinHostMon and hardware data sources, enabling correlation between incidents and physical assets.
+
+**Splunk Query:**\
+index=botsv3 sourcetype="WinHostMon"
+| stats count by Type
+
+
+![Figure 4.3.1](Quiz/Q3.1.jpg)\
+**Figure 4.3.1**
+
+Figure 4.3.1 shows the WinHostMon event counts by Type (processor, disk, logical), representing Windows host monitoring information from various terminals.
+
+**Splunk Query:**\
+index=botsv3 sourcetype=hardware
+| stats count by host
+
+![Figure 4.3.2](Quiz/Q3.2.jpg)\
+**Figure 4.3.2**
+
+Figure 4.3.2 lists all web servers in the dataset, all using Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz.
+
+Hardware inventory is critical in a SOC and in digital forensics because it provides a complete catalog of system assets. It helps organizations identify the scope of affected devices and assess their risk exposure. In digital forensics, it can confirm the system configuration at the time of an incident and support device authenticity verification.
