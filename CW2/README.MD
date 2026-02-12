@@ -157,3 +157,27 @@ index=botsv3 sourcetype=hardware
 Figure 4.3.2 lists all web servers in the dataset, all using Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GHz.
 
 Hardware inventory is critical in a SOC and in digital forensics because it provides a complete catalog of system assets. It helps organizations identify the scope of affected devices and assess their risk exposure. In digital forensics, it can confirm the system configuration at the time of an incident and support device authenticity verification.
+
+### Question 4-6: S3 bucket 
+
+It is known that this incident was triggered by an S3 bucket being configured as public. Therefore, we need to locate the Event ID of the API call to determine the trigger time, identify the user who performed the misconfiguration, and confirm the S3 bucket name.
+
+**Splunk Query:**\
+index=botsv3 sourcetype="aws:cloudtrail" eventName="PutBucketAcl" "AllUsers"
+| table eventTime eventSource eventName requestParameters eventide
+
+![Figure 4.4.1](Quiz/Q4.1.jpg)\
+**Figure 4.4.1**
+
+![Figure 4.5.1](Quiz/Q5.1.jpg)\
+**Figure 4.5.1**
+
+![Figure 4.6.1](Quiz/Q6.1.jpg)\
+**Figure 4.6.1**
+
+In Figure 4.4.1, the query lists all eventName="PutBucketAcl" events where the grantee is AllUsers within sourcetype="aws:cloudtrail". In this incident, the relevant eventID is **“ab45689d-69cd-41e7-8705-5350402cf7ac**
+
+When drilling down into the JSON event under requestParameters, there are two grantees. For each grantee, the uri is set to AllUsers, and the permissions are set to READ and WRITE (with xsi:type set to Group). This indicates that the event configured the S3 bucket ACL to be public accessible by everyone.
+
+In the same JSON event shown in Figures 4.5.1 and 4.6.1, the configuration applies to the bucketName: **"frothlywebcode"** and the userName: **"bstoll"**. This indicates that on **"2018-08-20 at 12:18:44"**, user bstoll configured the frothlywebcode bucket, resulting in it being accessible by everyone.
+
