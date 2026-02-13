@@ -181,3 +181,41 @@ When drilling down into the JSON event under requestParameters, there are two gr
 
 In the same JSON event shown in Figures 4.5.1 and 4.6.1, the configuration applies to the bucketName: **"frothlywebcode"** and the userName: **"bstoll"**. This indicates that on **"2018-08-20 at 13:01:46"**, user bstoll configured the frothlywebcode bucket, resulting in it being accessible by everyone.
 
+### Question 7: Impact Assessment
+
+After identifying that the "frothlywebcode" bucket has been misconfigured, as a SOC Tier 2 analyst, I am required to determine if the exposure was exploited. Use the following query to look for PUT and GET requests from external IP addresses targeting the "frothlywebcode" bucket.
+
+**Splunk Query:**\
+index=botsv3 sourcetype="aws:s3:accesslogs" "frothlywebcode" "PUT"
+| rex field=_raw "(?<client_ip>\d+\.\d+\.\d+\.\d+)"
+| rex field=_raw "^\S+\s+(?<bucket>\S+)\s+\["
+| rex field=_raw "\"PUT\s+/(?<object_key>[^ ]+)\s+HTTP/1\.1\""
+| table _time client_ip bucket object_key
+
+![Figure 4.7.1](Quiz/Q7.1.jpg)\
+**Figure 4.7.1**
+
+**Splunk Query:**\
+index=botsv3 sourcetype="aws:s3:accesslogs" "frothlywebcode" "REST.GET.OBJECT"
+| rex field=_raw "(?<client_ip>\d+\.\d+\.\d+\.\d+)"
+| rex field=_raw "^\S+\s+(?<bucket>\S+)\s+\["
+| rex field=_raw "\"GET\s+/(?<object_key>[^ ]+)\s+HTTP/1\.1\""
+| table _time client_ip bucket object_key
+
+![Figure 4.7.2](Quiz/Q7.2.jpg)\
+**Figure 4.7.2**
+
+In Figure 4.7.1 is show someone put a. text file **“OPEN_BUCKET_PLEASE_FIX.txt” **into the bucket from IP address 52.66.146.128, and IP address 35.182.46.222 put the **frothly_html_memcached.tar.gz”** into the bucket.  From  Figure 4.7.3 in the event detail of IP address 107.77.212.175 can prove the user as bstoll configure the acl and using the pre-signed URL to upload the **”frothly_html_memcached.tar.gz”** From  Figure 4.7.4.
+
+![Figure 4.7.3](Quiz/Q7.3.jpg)\
+**Figure 4.7.3**
+
+![Figure 4.7.4](Quiz/Q7.4.jpg)\
+**Figure 4.7.4**
+
+Figure 4.7.1 shows that someone uploaded a text file "OPEN_BUCKET_PLEASE_FIX.txt" to the bucket from IP address 52.66.146.128, while IP address 35.182.46.222 uploaded "frothly_html_memcached.tar.gz" to the bucket. As shown in Figure 4.7.3 and 4.7.4, the event details from IP address 107.77.212.175 indicate that user bstoll configured the ACL and used a pre-signed URL to upload **"frothly_html_memcached.tar.gz”**.
+
+Figure 4.7.2 shows GET requests to the "frothlywebcode" bucket from external IP addresses. "frothly_html_memcached.tar.gz" was downloaded by 35.182.246.222, 35.183.247.244, and 52.53.233.88, confirming the bucket exposure was exploited.
+
+This evidence proves that bstoll misconfigured the "frothlywebcode" bucket, which enabled unauthorized external users to both upload and download files.
+
