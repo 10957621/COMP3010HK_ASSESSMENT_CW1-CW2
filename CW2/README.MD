@@ -205,7 +205,7 @@ index=botsv3 sourcetype="aws:s3:accesslogs" "frothlywebcode" "REST.GET.OBJECT"
 ![Figure 4.7.2](Quiz/Q7.2.jpg)\
 **Figure 4.7.2**
 
-In Figure 4.7.1 is show someone put a. text file **“OPEN_BUCKET_PLEASE_FIX.txt” **into the bucket from IP address 52.66.146.128, and IP address 35.182.46.222 put the **frothly_html_memcached.tar.gz”** into the bucket.  From  Figure 4.7.3 in the event detail of IP address 107.77.212.175 can prove the user as bstoll configure the acl and using the pre-signed URL to upload the **”frothly_html_memcached.tar.gz”** From  Figure 4.7.4.
+In Figure 4.7.1 is show someone put a. text file **“OPEN_BUCKET_PLEASE_FIX.txt”** into the bucket from IP address 52.66.146.128, and IP address 35.182.46.222 put the **"frothly_html_memcached.tar.gz”** into the bucket.  From  Figure 4.7.3 in the event detail of IP address 107.77.212.175 can prove the user as bstoll configure the acl and using the pre-signed URL to upload the **”frothly_html_memcached.tar.gz”** From  Figure 4.7.4.
 
 ![Figure 4.7.3](Quiz/Q7.3.jpg)\
 **Figure 4.7.3**
@@ -213,9 +213,44 @@ In Figure 4.7.1 is show someone put a. text file **“OPEN_BUCKET_PLEASE_FIX.txt
 ![Figure 4.7.4](Quiz/Q7.4.jpg)\
 **Figure 4.7.4**
 
-Figure 4.7.1 shows that someone uploaded a text file "OPEN_BUCKET_PLEASE_FIX.txt" to the bucket from IP address 52.66.146.128, while IP address 35.182.46.222 uploaded "frothly_html_memcached.tar.gz" to the bucket. As shown in Figure 4.7.3 and 4.7.4, the event details from IP address 107.77.212.175 indicate that user bstoll configured the ACL and used a pre-signed URL to upload **"frothly_html_memcached.tar.gz”**.
+Figure 4.7.1 shows that someone uploaded a text file **"OPEN_BUCKET_PLEASE_FIX.txt"** to the bucket from IP address 52.66.146.128, while IP address 35.182.46.222 uploaded **"frothly_html_memcached.tar.gz"** to the bucket. As shown in Figure 4.7.3 and 4.7.4, the event details from IP address 107.77.212.175 indicate that user bstoll configured the ACL and used a pre-signed URL to upload **"frothly_html_memcached.tar.gz”**.
 
 Figure 4.7.2 shows GET requests to the "frothlywebcode" bucket from external IP addresses. "frothly_html_memcached.tar.gz" was downloaded by 35.182.246.222, 35.183.247.244, and 52.53.233.88, confirming the bucket exposure was exploited.
 
 This evidence proves that bstoll misconfigured the "frothlywebcode" bucket, which enabled unauthorized external users to both upload and download files.
+
+### Question 8: Chain of custody
+
+With bstoll identified as the suspect, the next step was to locate his physical endpoint device. The following query is lists out all host and then find the computer name of user bstoll.
+
+**Splunk Query:**\
+index=botsv3 sourcetype="WinHostMon" 
+| dedup host 
+| table host
+| sort host
+
+![Figure 4.8.1](Quiz/Q8.1.jpg)\
+**Figure 4.8.1**
+
+**Splunk Query:**\
+index=botsv3 "BSTOLL-L"  host="BSTOLL-L"
+
+![Figure 4.8.2](Quiz/Q8.2.jpg)\
+**Figure 4.8.2**
+
+Figure 4.8.1 shows all hosts that have been identified, and Figure 4.8.2 shows that the FQDN of host **"BSTOLL-L"** is **"BSTOLL-L.froth.ly"**
+
+**Splunk Query:**\
+index=botsv3 sourcetype="WinHostMon" Type=OperatingSystem 
+| stats count by host, OS
+
+![Figure 4.8.3](Quiz/Q8.3.jpg)\
+**Figure 4.8.3**
+
+Figure 4.8.3 shows which operating system each host uses. BSTOLL-L is using Microsoft window 10 Enterprise.
+
+Chain of custody:\
+1. User bstoll using the computer call **"BSTOLL-L.froth.ly"** which runs **"Microsoft window 10 Enterprise"**\
+2. bstoll misconfigured start in 2018-08-20 21:01:46 and configure the bucket set as pulic.\
+3. Confirme the someon through put request to upload file adn get require download whihc the prove the bucket is opening.\
 
