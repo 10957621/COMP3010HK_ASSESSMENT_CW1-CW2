@@ -1,13 +1,12 @@
 # BOTSv3 Incident Analysis Report
 
-**Student Name:** [Your Name]
-**Student ID:** [Your Student ID]
+**Student ID:** [10957621]
 **Module:** COMP3010HK
 **Date:** February 2026
 
 ---
-
-## 📹 Video Presentation
+## GitHub: 
+## Video Presentation
 [**Click here to watch my video presentation on YouTube**](PASTE_YOUR_YOUTUBE_LINK_HERE)
 
 ---
@@ -34,7 +33,6 @@ With proper prevention and monitoring, Tier 1 and Tier 2 could use CloudTrail, S
 
 ### Conclusion on SOC Visibility
 Currently, BOTSv3 provides raw CloudTrail and S3 access logs, it seems without predefined alerts. In a real SOC, these patterns would be implemented as alerts.
-This case illustrates that without CloudTrail and Splunk monitoring, and without controls around S3 public access, a data‑exposure risk could easily be overlooked; a layered SOC model helps ensure that each tier contributes to monitoring, deep analysis, and continuous improvement of the security posture.
 
 ## 3. Installation & Data Preparation
 For the SOC infrastructure, an Ubuntu 22.04.5 virtual machine was deployed on a Windows host, and Splunk Enterprise 10.0.2 was installed on this VM for the investigation. This setup emulates a typical SOC architecture where a dedicated Linux server hosts the SIEM platform.
@@ -213,11 +211,7 @@ In Figure 4.7.1 is show someone put a. text file **“OPEN_BUCKET_PLEASE_FIX.txt
 ![Figure 4.7.4](Quiz/Q7.4.jpg)\
 **Figure 4.7.4**
 
-Figure 4.7.1 shows that someone uploaded a text file **"OPEN_BUCKET_PLEASE_FIX.txt"** to the bucket from IP address 52.66.146.128, while IP address 35.182.46.222 uploaded **"frothly_html_memcached.tar.gz"** to the bucket. As shown in Figure 4.7.3 and 4.7.4, the event details from IP address 107.77.212.175 indicate that user bstoll configured the ACL and used a pre-signed URL to upload **"frothly_html_memcached.tar.gz”**.
-
-Figure 4.7.2 shows GET requests to the "frothlywebcode" bucket from external IP addresses. "frothly_html_memcached.tar.gz" was downloaded by 35.182.246.222, 35.183.247.244, and 52.53.233.88, confirming the bucket exposure was exploited.
-
-This evidence proves that bstoll misconfigured the "frothlywebcode" bucket, which enabled unauthorized external users to both upload and download files.
+Figure 4.7.1 shows that an external actor at IP 52.66.146.128 uploaded a text file named OPEN_BUCKET_PLEASE_FIX.txt. This is the specific file requested in the investigation.Additionally, IP 35.182.46.222 uploaded frothly_html_memcached.tar.gz.Figure 4.7.2 confirms that frothly_html_memcached.tar.gz was subsequently downloaded by multiple external IPs (35.182.246.222, 52.53.233.88), confirming that the bucket exposure was actively exploited for data exfiltration.
 
 ### Question 8: FQDN
 
@@ -249,10 +243,15 @@ index=botsv3 sourcetype="WinHostMon" Type=OperatingSystem
 
 Figure 4.8.3 shows which operating system each host uses. BSTOLL-L is using Microsoft window 10 Enterprise.
 
-***Cryptojacking***
-The previous section showed that Frothly's S3 bucket 'frothlywebcode' in AWS was misconfigured as public, allowing unauthorized file uploads. This indicates a high probability of an active attack. Since the dataset is from 2018, a period when cryptojacking was prevalent, checking CPU usage is a logical next step for the investigation.
+## 5. Conclusion, References and Presentation 
+This investigation confirmed a data exposure incident within Frothly's AWS environment. The roof case was identified as misconfiguration change by user bstoll, who modified the access control list of frothlywebcode S3 bucket to public via the 'PutBucketAcl' API Event ID: ab45689d-69cd-41e7-8705-5350402cf7ac. The result is external actors who uploaded a 'OPEN_BUCKET_PLEASE_FIX.txt' and potential malware((`frothly_html_memcached.tar.gz`) which could be download and after modify to replace. When analysis of the associated endpoint (**BSTOLL-L**) revealed indicators of cryptojacking (100% CPU usage by browser processes), suggesting that the user's account compromise extended beyond the cloud environment to the physical endpoint.
+This incident show the logs were being collected but a lack of active alerting, The Tier 1 analysts cannot respond to they are not notified. Multi user false on the MFA represents a fundamental failure in identify security. 
+Enable the Block Public Account setting at the AWS Account level to prevent any user from accidentally exposing buckets. Enforce MFA for all IAM users and rotate the credentials for `bstoll` immediately. Create a high-severity Splunk alert for the specific CloudTrail and an endpoint alert for sustained High CPU Usage to known mining pools to detect cryptojacking.
 
-**Splunk Query:**\
+##Cryptojacking
+The previous section showed that Frothly's S3 bucket was misconfigured. Since the dataset is from 2018, a period when cryptojacking was prevalent, I hypothesized that the compromised endpoint (BSTOLL-L) might be infected.
+
+**Splunk Query:**
 index=botsv3 sourcetype="PerfmonMk:Process"
 | rex field=_raw "^(?<extracted_process_name>[^\s]+)\s+\S+\s+(?<extracted_cpu>\S+)"
 | search extracted_process_name="*"
