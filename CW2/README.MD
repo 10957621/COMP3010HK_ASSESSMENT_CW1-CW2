@@ -254,3 +254,38 @@ Chain of custody:\
 2. bstoll misconfigured start in 2018-08-20 21:01:46 and configure the bucket set as pulic.\
 3. Confirme the someon through put request to upload file adn get require download whihc the prove the bucket is opening.\
 
+The previous section showed that Frothly's S3 bucket 'frothlywebcode' in AWS was misconfigured as public, allowing unauthorized file uploads. This indicates a high probability of an active attack. Since the dataset is from 2018, a period when cryptojacking was prevalent, checking CPU usage is a logical next step for the investigation.
+
+**Splunk Query:**\
+index=botsv3 sourcetype="PerfmonMk:Process"
+| rex field=_raw "^(?<extracted_process_name>[^\s]+)\s+\S+\s+(?<extracted_cpu>\S+)"
+| search extracted_process_name="*"
+| search extracted_cpu > 0
+| stats avg(extracted_cpu) as Avg_CPU max(extracted_cpu) as Max_CPU by extracted_process_name, host
+| sort -Max_CPU
+
+![Figure 4.9.0](Quiz/Q9.0.jpg)\
+**Figure 4.9.0**
+
+In Figure 4.9.0, it show the Brower unusually have 100% using CPU record.
+
+**Splunk Query:**\
+index=botsv3 sourcetype="PerfmonMk:Process" host="BSTOLL-L"
+| rex field=_raw "^(?<extracted_process_name>[^\s]+)\s+\S+\s+(?<extracted_cpu>\S+)"
+| search extracted_process_name IN ("_Total", "chrome#4", "chrome#5", "TiWorker", "MsMpEng", "chrome#6")
+| timechart span=1m max(extracted_cpu) by extracted_process_name limit=10
+
+![Figure 4.9.1](Quiz/Q9.1.jpg)\
+**Figure 4.9.1**
+
+**Splunk Query:**\
+index=botsv3 sourcetype="stream:dns" query!=" " query!="-"
+earliest="08/20/2018:21:39:00"
+| table _time, query
+| sort _time
+
+![Figure 4.9.2](Quiz/Q9.2.jpg)\
+**Figure 4.9.2**\
+![Figure 4.9.3](Quiz/Q9.3.jpg)\
+**Figure 4.9.3**
+
