@@ -219,7 +219,7 @@ Figure 4.7.2 shows GET requests to the "frothlywebcode" bucket from external IP 
 
 This evidence proves that bstoll misconfigured the "frothlywebcode" bucket, which enabled unauthorized external users to both upload and download files.
 
-### Question 8: Chain of custody
+### Question 8: FQDN
 
 With bstoll identified as the suspect, the next step was to locate his physical endpoint device. The following query is lists out all host and then find the computer name of user bstoll.
 
@@ -249,11 +249,7 @@ index=botsv3 sourcetype="WinHostMon" Type=OperatingSystem
 
 Figure 4.8.3 shows which operating system each host uses. BSTOLL-L is using Microsoft window 10 Enterprise.
 
-Chain of custody:\
-1. User bstoll using the computer call **"BSTOLL-L.froth.ly"** which runs **"Microsoft window 10 Enterprise"**\
-2. bstoll misconfigured start in 2018-08-20 21:01:46 and configure the bucket set as pulic.\
-3. Confirme the someon through put request to upload file adn get require download whihc the prove the bucket is opening.\
-
+***Cryptojacking***
 The previous section showed that Frothly's S3 bucket 'frothlywebcode' in AWS was misconfigured as public, allowing unauthorized file uploads. This indicates a high probability of an active attack. Since the dataset is from 2018, a period when cryptojacking was prevalent, checking CPU usage is a logical next step for the investigation.
 
 **Splunk Query:**\
@@ -267,7 +263,7 @@ index=botsv3 sourcetype="PerfmonMk:Process"
 ![Figure 4.9.0](Quiz/Q9.0.jpg)\
 **Figure 4.9.0**
 
-In Figure 4.9.0, it show the Brower unusually have 100% using CPU record.
+Figure 4.9.0 shows that the browser process is unusually consuming 100% of the CPU. Figures 4.9.1 to 4.9.3 confirm that the browser's high CPU usage time matches the DNS record, indicating a browser-based cryptojacking incident.
 
 **Splunk Query:**\
 index=botsv3 sourcetype="PerfmonMk:Process" host="BSTOLL-L"
