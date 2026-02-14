@@ -244,9 +244,19 @@ index=botsv3 sourcetype="WinHostMon" Type=OperatingSystem
 Figure 4.8.3 shows which operating system each host uses. BSTOLL-L is using Microsoft window 10 Enterprise.
 
 ## 5. Conclusion, References and Presentation 
-This investigation confirmed a data exposure incident within Frothly's AWS environment. The roof case was identified as misconfiguration change by user bstoll, who modified the access control list of frothlywebcode S3 bucket to public via the 'PutBucketAcl' API Event ID: ab45689d-69cd-41e7-8705-5350402cf7ac. The result is external actors who uploaded a 'OPEN_BUCKET_PLEASE_FIX.txt' and potential malware((`frothly_html_memcached.tar.gz`) which could be download and after modify to replace. When analysis of the associated endpoint (**BSTOLL-L**) revealed indicators of cryptojacking (100% CPU usage by browser processes), suggesting that the user's account compromise extended beyond the cloud environment to the physical endpoint.
-This incident show the logs were being collected but a lack of active alerting, The Tier 1 analysts cannot respond to they are not notified. Multi user false on the MFA represents a fundamental failure in identify security. 
-Enable the Block Public Account setting at the AWS Account level to prevent any user from accidentally exposing buckets. Enforce MFA for all IAM users and rotate the credentials for `bstoll` immediately. Create a high-severity Splunk alert for the specific CloudTrail and an endpoint alert for sustained High CPU Usage to known mining pools to detect cryptojacking.
+This investigation confirmed a data exposure incident within Frothly's AWS environment. The root cause was identified as a misconfiguration by user bstoll, who modified the frothlywebcode S3 bucket's Access Control List (ACL) to public via the PutBucketAcl API (Event ID: ab45689d-69cd-41e7-8705-5350402cf7ac).
+
+This exposure allowed external actors to upload a warning file, 'OPEN_BUCKET_PLEASE_FIX.txt', and a potentially malicious archive, 'frothly_html_memcached.tar.gz', which could be downloaded, modified, and re-uploaded. Analysis of the associated endpoint (BSTOLL-L) revealed indicators of cryptojacking, specifically sustained 100% CPU usage by browser processes, suggesting the user's compromise extended from the cloud environment to the physical endpoint.
+
+The incident highlights that while logs were being collected, a lack of active alerting prevented Tier 1 analysts from responding. Furthermore, the absence of Multi-Factor Authentication (MFA) for multiple users represents a fundamental failure in identity security.
+
+**Recommendations:**
+
+1.Enable 'Block Public Access' at the AWS account level to prevent accidental bucket exposure.
+
+2.Enforce MFA for all IAM users and rotate bstoll's credentials immediately.
+
+3.Create high-severity Splunk alerts for specific CloudTrail events (like PutBucketAcl) and endpoint alerts for sustained high CPU usage associated with known mining pools to detect cryptojacking."
 
 ## Cryptojacking
 The previous section showed that Frothly's S3 bucket was misconfigured. Since the dataset is from 2018, a period when cryptojacking was prevalent, I hypothesized that the compromised endpoint (BSTOLL-L) might be infected.
