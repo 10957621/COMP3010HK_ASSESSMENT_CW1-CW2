@@ -5,7 +5,7 @@
 **Date:** February 2026
 
 ---
-## GitHub: 
+## GitHub: https://github.com/10957621/COMP3010HK_ASSESSMENT_CW1-CW2.git
 ## Video Presentation
 [**Click here to watch my video presentation on YouTube**](PASTE_YOUR_YOUTUBE_LINK_HERE)
 
@@ -248,7 +248,7 @@ This investigation confirmed a data exposure incident within Frothly's AWS envir
 This incident show the logs were being collected but a lack of active alerting, The Tier 1 analysts cannot respond to they are not notified. Multi user false on the MFA represents a fundamental failure in identify security. 
 Enable the Block Public Account setting at the AWS Account level to prevent any user from accidentally exposing buckets. Enforce MFA for all IAM users and rotate the credentials for `bstoll` immediately. Create a high-severity Splunk alert for the specific CloudTrail and an endpoint alert for sustained High CPU Usage to known mining pools to detect cryptojacking.
 
-##Cryptojacking
+## Cryptojacking
 The previous section showed that Frothly's S3 bucket was misconfigured. Since the dataset is from 2018, a period when cryptojacking was prevalent, I hypothesized that the compromised endpoint (BSTOLL-L) might be infected.
 
 **Splunk Query:**
