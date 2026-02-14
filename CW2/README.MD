@@ -5,24 +5,25 @@
 **Date:** February 2026
 
 ---
-## GitHub: https://github.com/10957621/COMP3010HK_ASSESSMENT_CW1-CW2.git
+## GitHub
+[https://github.com/10957621/COMP3010HK_ASSESSMENT_CW1-CW2.git]
 ## Video Presentation
 [**Click here to watch my video presentation on YouTube**](PASTE_YOUR_YOUTUBE_LINK_HERE)
 
 ---
 
 ## 1. Introduction
-This report presents an incident investigation using the BOTSv3 dataset, focusing on AWS and S3 bucket events in the Frothly environment. Using Splunk as the primary analysis platform, the investigation reconstructs the cyber kill chain, explains how the incident unfolded, and identifies key vulnerabilities and misconfigurations. 
+This report presents an incident investigation using the BOTSv3 dataset[1], focusing on AWS and S3 bucket events in the Frothly environment. Using Splunk as the primary analysis platform, the investigation reconstructs the cyber kill chain following the NIST Incident Response Framework [2], explains how the incident unfolded, and identifies key vulnerabilities and misconfigurations. 
 
 The primary goal of this investigation is to locate potential data leakage points in Frothly’s AWS environment and understand how they could be exploited, and to derive actionable recommendations that reduce the likelihood of similar incidents in the future. 
 
-Splunk Enterprise was deployed on an Ubuntu virtual machine as an independent SOC environment for ingesting and analysing BOTSv3 logs. The following sections discuss SOC roles and incident handling, installation and data preparation, guided question analysis, and finally the overall conclusions and presentation strategy.
+Splunk Enterprise[8] was deployed on an Ubuntu virtual machine as an independent SOC environment for ingesting and analysing BOTSv3 logs. The following sections discuss SOC roles and incident handling, installation and data preparation, guided question analysis, and finally the overall conclusions and presentation strategy.
 
 ## 2. SOC Roles & Incident Handling Reflection
-In this report, the analysis is carried out from the perspective of a Tier 2 SOC analyst handling an escalated incident. 
+In this report, the analysis is carried out from the perspective of a Tier 2 SOC analyst[6]handling an escalated incident. 
 
 ### Preventive Controls Analysis
-In this incident, several preventive controls should have been in place, including mandatory MFA, least‑privilege IAM policies, S3 public access blocks, and alerting on high‑risk configuration changes. Without these measures, the misconfiguration of a public S3 bucket and weak authentication could easily remain unnoticed, leaving Tier 1 with no meaningful alerts to act on. 
+In this incident, several preventive controls should have been in place, including mandatory MFA, least‑privilege IAM policies, S3 public access blocks, and alerting on high‑risk configuration changes. Without these measures, the misconfiguration of a public S3 bucket and weak authentication could easily remain unnoticed, leaving Tier 1 with no meaningful alerts to act upon, which significantly hampers the effectiveness of the initial triage phase [9]. 
 
 ### Detection & Response
 With proper prevention and monitoring, Tier 1 and Tier 2 could use CloudTrail, S3 access logs, and winhostmon data to quickly detect that a bucket had been made public and that an endpoint was behaving abnormally.
@@ -96,7 +97,7 @@ The objective of this section is to conduct a forensic investigation using Splun
 
 The investigation began by identify who exists in the environment  queried CloudTrail logs to list all unique user identities to understand who exists in the environment.
 
-**Splunk Query:**\  
+**Splunk Query:**
 index=botsv3 sourcetype="aws:cloudtrail" userIdentity.type="IAMUser" 
 | stats count by userIdentity.userName
 
@@ -129,7 +130,7 @@ The Figure 4.2.1 is showing  the  MFA status as false, and though the query Figu
 ![Figure 4.2.2](Quiz/Q2.2.jpg)\
 **Figure 4.2.2** 
 
-In a production SOC, lack of MFA on administrative accounts is a critical vulnerability. Alerts should be configured to trigger immediately if a privileged user logs in without MFA tokens.
+In a production SOC, lack of MFA on administrative accounts is a critical vulnerability, and CISA [7] explicitly recommends phishing-resistant MFA for all privileged cloud accounts."
 
 ### Question 3: Hardware Inventory
 
@@ -158,7 +159,7 @@ Hardware inventory is critical in a SOC and in digital forensics because it prov
 
 ### Question 4-6: S3 bucket 
 
-It is known that this incident was triggered by an S3 bucket being configured as public. Therefore, we need to locate the Event ID of the API call to determine the trigger time, identify the user who performed the misconfiguration, and confirm the S3 bucket name.
+It is known that this incident was triggered by an S3 bucket being configured as public. To investigate this, I utilized the aws:cloudtrail sourcetype, which is the standard log source for recording AWS API calls [5]. By searching these logs, I located the specific Event ID to determine the trigger time, identify the user who performed the misconfiguration, and confirm the S3 bucket name.
 
 **Splunk Query:**\
 index=botsv3 sourcetype="aws:cloudtrail" eventName="PutBucketAcl" "AllUsers"
@@ -175,7 +176,7 @@ index=botsv3 sourcetype="aws:cloudtrail" eventName="PutBucketAcl" "AllUsers"
 
 In Figure 4.4.1, the query lists all eventName="PutBucketAcl" events where the grantee is AllUsers within sourcetype="aws:cloudtrail". In this incident, the relevant eventID is **“ab45689d-69cd-41e7-8705-5350402cf7ac**
 
-When drilling down into the JSON event under requestParameters, there are two grantees. For each grantee, the uri is set to AllUsers, and the permissions are set to READ and WRITE (with xsi:type set to Group). This indicates that the event configured the S3 bucket ACL to be public accessible by everyone.
+When drilling down into the JSON event under requestParameters, there are two grantees. For each grantee, the uri is set to AllUsers, and the permissions are set to READ and WRITE (with xsi:type set to Group). This indicates that the event configured the S3 bucket ACL to be publicly accessible, violating AWS Security Best Practices [3].
 
 In the same JSON event shown in Figures 4.5.1 and 4.6.1, the configuration applies to the bucketName: **"frothlywebcode"** and the userName: **"bstoll"**. This indicates that on **"2018-08-20 at 13:01:46"**, user bstoll configured the frothlywebcode bucket, resulting in it being accessible by everyone.
 
@@ -258,7 +259,31 @@ The incident highlights that while logs were being collected, a lack of active a
 
 3.Create high-severity Splunk alerts for specific CloudTrail events (like PutBucketAcl) and endpoint alerts for sustained high CPU usage associated with known mining pools to detect cryptojacking."
 
+## Reference
+
+[1] Splunk, "Boss of the SOC (BOTS) Version 3 Dataset," *GitHub Repository*, 2020. [Online]. Available: https://github.com/splunk/botsv3. [Accessed: Feb. 14, 2026].
+
+[2] P. Cichonski, T. Millar, T. Grance, and K. Scarfone, "Computer Security Incident Handling Guide," *National Institute of Standards and Technology (NIST)*, Gaithersburg, MD, Special Publication 800-61 Rev. 2, Aug. 2012. doi: 10.6028/NIST.SP.800-61r2.
+
+[3] Amazon Web Services, "Security Best Practices for Amazon S3," *AWS Documentation*, 2024. [Online]. Available: https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html.
+
+[4] MITRE, "Resource Hijacking (T1496)," *MITRE ATT&CK Framework*, 2024. [Online]. Available: https://attack.mitre.org/techniques/T1496/.
+
+[5] Amazon Web Services, "Logging Amazon S3 API calls using AWS CloudTrail," *AWS Documentation*, 2024. [Online]. Available: https://docs.aws.amazon.com/AmazonS3/latest/userguide/cloudtrail-logging.html.
+
+[6] C. Crowley and J. Pescatore, "Common and Best Practices for Security Operations Centers: Results of the 2019 SOC Survey," *SANS Institute*, 2019. [Online]. Available: https://www.sans.org/white-papers/39350/.
+
+[7] Cybersecurity and Infrastructure Security Agency (CISA), "Implementing Phishing-Resistant MFA," *CISA Fact Sheet*, 2023. [Online]. Available: https://www.cisa.gov/resources-tools/resources/implementing-phishing-resistant-mfa.
+
+[8] Splunk, "Splunk Enterprise Documentation: About Splunk Enterprise," *Splunk Docs*, 2024. [Online]. Available: https://docs.splunk.com/Documentation/Splunk/latest/Overview/AboutSplunkEnterprise.
+
+[9] E. D. Kilgallon, "Improving the Effectiveness of the Tier 1 Security Analyst," *SANS Reading Room*, 2020.
+
+
+# Appendix A:
 ## Cryptojacking
+*(This section provides supplementary forensic analysis beyond the guided questions)*
+
 The previous section showed that Frothly's S3 bucket was misconfigured. Since the dataset is from 2018, a period when cryptojacking was prevalent, I hypothesized that the compromised endpoint (BSTOLL-L) might be infected.
 
 **Splunk Query:**
@@ -272,7 +297,7 @@ index=botsv3 sourcetype="PerfmonMk:Process"
 ![Figure 4.9.0](Quiz/Q9.0.jpg)\
 **Figure 4.9.0**
 
-Figure 4.9.0 shows that the browser process is unusually consuming 100% of the CPU. Figures 4.9.1 to 4.9.3 confirm that the browser's high CPU usage time matches the DNS record, indicating a browser-based cryptojacking incident.
+Figure 4.9.0 shows that the browser process is unusually consuming 100% of the CPU. Figures 4.9.1 to 4.9.3 confirm that the browser's high CPU usage time matches the DNS record, indicating a browser-based cryptojacking incident,, which aligns with MITRE ATT&CK technique T1496 (Resource Hijacking) [4].
 
 **Splunk Query:**\
 index=botsv3 sourcetype="PerfmonMk:Process" host="BSTOLL-L"
@@ -293,4 +318,3 @@ earliest="08/20/2018:21:39:00"
 **Figure 4.9.2**\
 ![Figure 4.9.3](Quiz/Q9.3.jpg)\
 **Figure 4.9.3**
-
