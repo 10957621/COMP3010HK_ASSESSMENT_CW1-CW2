@@ -279,8 +279,9 @@ The incident highlights that while logs were being collected, a lack of active a
 
 [9] E. D. Kilgallon, "Improving the Effectiveness of the Tier 1 Security Analyst," *SANS Reading Room*, 2020.
 
+---
+# Appendix A
 
-# Appendix A:
 ## Cryptojacking
 *(This section provides supplementary forensic analysis beyond the guided questions)*
 
