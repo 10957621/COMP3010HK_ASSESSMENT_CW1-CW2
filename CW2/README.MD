@@ -119,7 +119,7 @@ The specific JSON path used to identify non-MFA sessions is: **userIdentity.sess
 **Figure 4.2.1** 
 
 **Splunk Query:**\
-index=botsv3 source="aws:cloudtrail" 
+index=botsv3 sourcetype="aws:cloudtrail" 
 | spath output=mfa_status path=userIdentity.sessionContext.attributes.mfaAuthenticated
 | search mfa_status=false
 | stats count by userIdentity.userName
