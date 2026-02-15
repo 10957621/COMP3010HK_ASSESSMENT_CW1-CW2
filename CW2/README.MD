@@ -198,7 +198,7 @@ index=botsv3 sourcetype="aws:s3:accesslogs" "frothlywebcode" "PUT"
 
 **Splunk Query:**\
 index=botsv3 sourcetype="aws:s3:accesslogs" "frothlywebcode" "REST.GET.OBJECT" 
-| rex field=_raw "(?<client_ip>\d+.\d+.\d+.\d+)" 
+| rex field=_raw "(?<client_ip>\d+.\d+.\d+\.\d+)" 
 | rex field=_raw "^\S+\s+(?<bucket>\S+)\s+\[" 
 | rex field=_raw "\"GET\s+/(?<object_key>[^ ]+)\s+HTTP/1\.1\""
 | table _time client_ip bucket object_key
