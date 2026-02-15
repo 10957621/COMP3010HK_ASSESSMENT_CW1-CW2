@@ -190,6 +190,7 @@ index=botsv3 sourcetype="aws:s3:accesslogs" "frothlywebcode" "PUT"
 | rex field=_raw "^\S+\s+(?<bucket>\S+)\s+\["
 | rex field=_raw "\"PUT\s+/(?<object_key>[^ ]+)\s+HTTP/1\.1\""
 | table _time client_ip bucket object_key
+
 ![Figure SPL7.1](Quiz/SPL7.1.jpg)\
 
 ![Figure 4.7.1](Quiz/Q7.1.jpg)\
@@ -201,6 +202,7 @@ index=botsv3 sourcetype="aws:s3:accesslogs" "frothlywebcode" "REST.GET.OBJECT"
 | rex field=_raw "^\S+\s+(?<bucket>\S+)\s+\[" 
 | rex field=_raw "\"GET\s+/(?<object_key>[^ ]+)\s+HTTP/1\.1\""
 | table _time client_ip bucket object_key
+
 ![Figure SPL7.2](Quiz/SPL7.2.jpg)\
 
 ![Figure 4.7.2](Quiz/Q7.2.jpg)\
