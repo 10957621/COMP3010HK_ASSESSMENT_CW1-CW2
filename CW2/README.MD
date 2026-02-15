@@ -187,8 +187,11 @@ After identifying that the "frothlywebcode" bucket has been misconfigured, as a 
 **Splunk Query:**\
 index=botsv3 sourcetype="aws:s3:accesslogs" "frothlywebcode" "PUT"
 | rex field=_raw "(?<client_ip>\d+\.\d+\.\d+\.\d+)"
+
 | rex field=_raw "^\S+\s+(?<bucket>\S+)\s+\["
+
 | rex field=_raw "\"PUT\s+/(?<object_key>[^ ]+)\s+HTTP/1\.1\""
+
 | table _time client_ip bucket object_key
 
 ![Figure 4.7.1](Quiz/Q7.1.jpg)\
@@ -196,9 +199,13 @@ index=botsv3 sourcetype="aws:s3:accesslogs" "frothlywebcode" "PUT"
 
 **Splunk Query:**\
 index=botsv3 sourcetype="aws:s3:accesslogs" "frothlywebcode" "REST.GET.OBJECT" 
+
 | rex field=_raw "(?<client_ip>\d+.\d+.\d+.\d+)" 
+
 | rex field=_raw "^\S+\s+(?<bucket>\S+)\s+\[" 
+
 | rex field=_raw "\"GET\s+/(?<object_key>[^ ]+)\s+HTTP/1\.1\""
+
 | table _time client_ip bucket object_key
 
 ![Figure 4.7.2](Quiz/Q7.2.jpg)\
