@@ -1,15 +1,17 @@
-# BOTSv3 Incident Analysis Report
+#  Courcework 2: BOTSv3 Incident Analysis Report
 
 **Student ID:** [10957621]
-**Module:** COMP3010HK
+**Module:** COMP3010HK Security Operations and Incident Management 
 **Date:** February 2026
 
 ---
 ## GitHub
 **https://github.com/10957621/COMP3010HK_ASSESSMENT_CW1-CW2.git**
+![GitHub0](GitHub0.png)
+![GitHub](GitHub.png)
 ## Video Presentation
+**https://www.youtube.com/watch?v=SM90B3rc2lk**
 ![youtubepreview](youtubepreview.png)
-[**Click here to watch my video presentation on YouTube**](https://www.youtube.com/watch?v=SM90B3rc2lk)
 
 ---
 
@@ -66,7 +68,7 @@ The following sections describe the VM installation steps and data preparation p
 **Figure 3.6:** Mount the shared folder in the VM and verify its contents
   
 ![Figure 3.7](Installation%20&%20Data%20Preparation/07.jpg)\  
-**Figure 3.7:** Verify that the Splunk package is suitable for installation using `dpkg`
+**Figure 3.7:** Verify that the Splunk package is suitable for installation using dpkg
  
 ![Figure 3.8](Installation%20&%20Data%20Preparation/08.jpg)\
 **Figure 3.8:** Install Splunk Enterprise and create the administrator profile 
@@ -285,9 +287,7 @@ The incident highlights that while logs were being collected, a lack of active a
 [9] E. D. Kilgallon, "Improving the Effectiveness of the Tier 1 Security Analyst," *SANS Reading Room*, 2020.
 
 ---
-# Appendix A
-
-## Cryptojacking
+## Appendix A - Cryptojacking
 *(This section provides supplementary forensic analysis beyond the guided questions)*
 
 The previous section showed that Frothly's S3 bucket was misconfigured. Since the dataset is from 2018, a period when cryptojacking was prevalent, I hypothesized that the compromised endpoint (BSTOLL-L) might be infected.
@@ -325,8 +325,56 @@ earliest="08/20/2018:21:39:00"
 ![Figure 4.9.3](Quiz/Q9.3.jpg)\
 **Figure 4.9.3**
 
-# Appendix B
-[![Read Declaration](preview.png)](./Student_Declaration_of_AI_Tool_use_in_this_Assessment.pdf)
-*Click the image above to download the full PDF report*
+## Appendix B - Student Declaration of AI Tool Use
+
+*The complete Student Declaration PDF follows on the next page.*
+<div style="page-break-after: always;"></div>
+
+## Appendix C  - GitHub Repository Availability & Incident Report
+Date of Report: 16 Feb 2026
+GitHub Username: 10957621
+Repository URL: https://github.com/10957621/COMP3010HK_ASSESSMENT_CW1-CW2
+
+### 1. Incident Summary
+On 2026-02-16 12:38 UTC, I received an email from GitHub with the subject **"Password reset notification due to suspicious activity"**. Therefore, I believe my GitHub account was flagged by GitHub's automated security systems due to a detected unauthorized login attempt (Account Takeover Protection). As a result, my public profile and repositories are currently hidden from public view and return a 404 error. I reset the password and enable the MFA immediately.
+![Figure c.1.1](Appendix_C/c.1.1.png)\
+**Figure C.1.1**
+
+![Figure c.1.2](Appendix_C/c.1.2.png)\
+**Figure C.1.2**
+
+![Figure c.1.3](Appendix_C/c.1.3.png)\
+**Figure C.1.3**
+
+![Figure c.1.4](Appendix_C/c.1.4.png)\
+**Figure C.1.4**
+
+![Figure c.1.5](Appendix_C/c.1.5.png)\
+**Figure C.1.5**
+
+### 2. Impact on Submission and Incident Response & Verification
+
+Then I checked the SSH and GPG keys and also reviewed the authorized applications.
+
+![Figure c.2.1](Appendix_C/c.2.1.png)\
+**Figure C.2.1**
+
+![Figure c.2.2](Appendix_C/c.2.2.png)\
+**Figure C.2.2**
+
+![Figure c.2.3](Appendix_C/c.2.3.png)\
+**Figure C.2.3**
+
+I can still upload or edit the repository, but all images I upload seem to be restricted by GitHub policy and show as damaged. Even though the repository is set as public, only I can see the content, which means it is not ready for assessment review. To fix this, I submitted a request to the GitHub Support team and explained the situation to request further assistance.
+
+![Figure c.2.4](Appendix_C/c.2.4.png)\
+**Figure C.2.4**
+
+![Figure c.2.5](Appendix_C/c.2.5.png)\
+**Figure C.2.5**
+
+![Figure c.2.6](Appendix_C/c.2.6.png)\
+**Figure C.2.6**
 
 
+### 3. Evidence of the Github work
