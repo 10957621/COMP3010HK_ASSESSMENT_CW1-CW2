@@ -7,8 +7,8 @@
 ---
 ## GitHub
 **https://github.com/10957621/COMP3010HK_ASSESSMENT_CW1-CW2.git**
-## Video Presentation\
-[![youtubepreview](youtubepreview.png)]
+## Video Presentation
+![youtubepreview](youtubepreview.png)
 [**Click here to watch my video presentation on YouTube**](https://www.youtube.com/watch?v=SM90B3rc2lk)
 
 ---
@@ -327,3 +327,6 @@ earliest="08/20/2018:21:39:00"
 
 # Appendix B
 [![Read Declaration](preview.png)](Student_Declaration_of_AI_Tool_use_in_this_Assessment.pdf)
+
+
+
