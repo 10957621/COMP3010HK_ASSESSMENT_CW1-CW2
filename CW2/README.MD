@@ -326,7 +326,7 @@ earliest="08/20/2018:21:39:00"
 **Figure 4.9.3**
 
 # Appendix B
-[![Read Declaration](preview.png)](Student_Declaration_of_AI_Tool_use_in_this_Assessment.pdf)
+[![Read Declaration](preview.png)](CW2/Student_Declaration_of_AI_Tool_use_in_this_Assessment.pdf)
 
 
 
