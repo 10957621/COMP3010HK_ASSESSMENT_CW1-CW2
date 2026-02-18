@@ -5,7 +5,36 @@
 **Date:** February 2026
 
 ---
+## Contents
+1. [GitHub](#github)
+2. [Video Presentation](#video-presentation)
+3. [1. Introduction](#1-introduction)
+4. [2. SOC Roles & Incident Handling Reflection](#2-soc-roles--incident-handling-reflection)
+    - [Preventive Controls Analysis](#preventive-controls-analysis)
+    - [Detection & Response](#detection--response)
+    - [Conclusion on SOC Visibility](#conclusion-on-soc-visibility)
+5. [3. Installation & Data Preparation](#3-installation--data-preparation)
+    - [Installation Evidence](#installation-evidence)
+    - [Data Validation](#data-validation)
+6. [4. Guided Questions Analysis](#4-guided-questions-analysis)
+    - [Question 1: Identifying IAM Users](#question-1-identifying-iam-users)
+    - [Question 2: Multi-Factor Authentication Check](#question-2-multi-factor-authentication-check)
+    - [Question 3: Hardware Inventory](#question-3-hardware-inventory)
+    - [Question 4-6: S3 bucket](#question-4-6-s3-bucket)
+    - [Question 7: Impact Assessment](#question-7-impact-assessment)
+    - [Question 8: FQDN](#question-8-fqdn)
+7. [5. Conclusion, References and Presentation](#5-conclusion-references-and-presentation)
+8. [Reference](#reference)
+9. [Appendix A - Cryptojacking](#appendix-a---cryptojacking)
+10. [Appendix B - Student Declaration of AI Tool Use](#appendix-b---student-declaration-of-ai-tool-use)
+11. [Appendix C - GitHub Repository Availability & Incident Report](#appendix-c---github-repository-availability--incident-report)
+    - [1. Incident Summary](#1-incident-summary)
+    - [2. Impact on Submission and Incident Response & Verification](#2-impact-on-submission-and-incident-response--verification)
+    - [3. Evidence of the Github work](#3-evidence-of-the-github-work)
+---
+
 ## GitHub
+If the link returns a 404 error, please refer to Appendix C – GitHub Repository Availability & Incident Report for details.
 **https://github.com/10957621/COMP3010HK_ASSESSMENT_CW1-CW2.git**
 ![GitHub0](GitHub0.png)
 ![GitHub](GitHub.png)
@@ -378,3 +407,55 @@ I can still upload or edit the repository, but all images I upload seem to be re
 
 
 ### 3. Evidence of the Github work
+
+Since my GitHub account may require a long time to complete the reinstatement request, this section presents my work for this module.
+
+This repository contains two folders corresponding to Coursework 1 and Coursework 2.
+
+![Figure c.3.1](Appendix_C/c.3.1.png)\
+**Figure C.3.1**
+
+
+#### 3.1 CW1
+
+*The details of CW1 follow on the next page. The evidence, such as screenshots, has already been inserted in the report and submitted in DLE previously.*
+<div style="page-break-after: always;"></div>
+
+#### 3.2 CW2
+
+**Important Note**: The following Git commit records and repository evidence 
+were captured on 2026-02-16 after the incident occurred, but the commit 
+timestamps themselves reflect the actual dates when the work was completed 
+(prior to the security incident). Git commit metadata is cryptographically 
+signed and tamper-evident, ensuring the authenticity of these timestamps.
+
+Despite the public visibility issue, I retain full access to my local 
+repository. The following evidence demonstrates my coursework completion 
+and authorship:
+
+The CW2 folder contains three subfolders: quiz, Installation & Data Preparation, and Appendix_C. These folder stores the screenshots used as evidence for the CW2 report.
+
+![Figure c.3.2.1](Appendix_C/c.3.2.1.png)\
+**Figure C.3.2.1**
+
+![Figure c.3.2.2](Appendix_C/c.3.2.2.png)\
+**Figure C.3.2.2**
+
+![Figure c.3.2.3](Appendix_C/c.3.2.3.png)\
+**Figure C.3.2.3**
+
+#### 3.3 CW2 Commits History
+![Figure commits_1](Appendix_C/commits_1.png)
+**Figure 3.3.1**
+
+![Figure commits_2](Appendix_C/commits_2.png)
+**Figure 3.3.2**
+
+![Figure commits_3](Appendix_C/commits_3.png)
+**Figure 3.3.3**
+
+![Figure commits_4](Appendix_C/commits_4.png)
+**Figure 3.3.4**
+
+![Figure commits_5](Appendix_C/commits_5.png)
+**Figure 3.3.5**
