@@ -1,4 +1,4 @@
-##  Courcework 2: BOTSv3 Incident Analysis Report
+##  Coursework 2: BOTSv3 Incident Analysis Report
 
 **Student ID:** [10957621]\
 **Module:** COMP3010HK Security Operations and Incident Management\
