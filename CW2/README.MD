@@ -36,7 +36,7 @@
 ## GitHub
 If the link returns a 404 error, please refer to Appendix C – GitHub Repository Availability & Incident Report for details.
 **https://github.com/10957621/COMP3010HK_ASSESSMENT_CW1-CW2.git**
-![GitHub0](GitHub0.png)
+![GitHub0](Github0.png)
 ![GitHub](GitHub.png)
 ## Video Presentation
 **https://www.youtube.com/watch?v=SM90B3rc2lk**
@@ -358,6 +358,7 @@ earliest="08/20/2018:21:39:00"
 
 *The complete Student Declaration PDF follows on the next page.*
 <div style="page-break-after: always;"></div>
+[Student Declaration of AI Tool use in this Assessment.pdf](./Student%20Declaration%20of%20AI%20Tool%20use%20in%20this%20Assessment.pdf)
 
 ## Appendix C  - GitHub Repository Availability & Incident Report
 Date of Report: 16 Feb 2026
