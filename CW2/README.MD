@@ -1,4 +1,4 @@
-#  Courcework 2: BOTSv3 Incident Analysis Report
+##  Courcework 2: BOTSv3 Incident Analysis Report
 
 **Student ID:** [10957621]\
 **Module:** COMP3010HK Security Operations and Incident Management\
@@ -78,40 +78,40 @@ The following sections describe the VM installation steps and data preparation p
 
 ### Installation Evidence
 
-![Figure 3.1](Installation%20&%20Data%20Preparation/01.jpg)\
+![Figure 3.1](Installation%20&%20Data%20Preparation/01.jpg)
 **Figure 3.1:** Configure the VM name and select the Ubuntu ISO image  
   
-![Figure 3.2](Installation%20&%20Data%20Preparation/02.jpg)\
+![Figure 3.2](Installation%20&%20Data%20Preparation/02.jpg)
 **Figure 3.2:** Configure the VM username and password
   
-![Figure 3.3](Installation%20&%20Data%20Preparation/03.jpg)\
+![Figure 3.3](Installation%20&%20Data%20Preparation/03.jpg)
 **Figure 3.3:** Allocate sufficient processors, RAM, and disk space to the VM
 
-![Figure 3.4](Installation%20&%20Data%20Preparation/04.jpg)\  
+![Figure 3.4](Installation%20&%20Data%20Preparation/04.jpg)
 **Figure 3.4:** Login to the Ubuntu VM  
  
-![Figure 3.5](Installation%20&%20Data%20Preparation/05.jpg)\
+![Figure 3.5](Installation%20&%20Data%20Preparation/05.jpg)
 **Figure 3.5:** Configure VirtualBox shared folders for file transfer 
   
-![Figure 3.6](Installation%20&%20Data%20Preparation/06.jpg)\  
+![Figure 3.6](Installation%20&%20Data%20Preparation/06.jpg)
 **Figure 3.6:** Mount the shared folder in the VM and verify its contents
   
-![Figure 3.7](Installation%20&%20Data%20Preparation/07.jpg)\  
+![Figure 3.7](Installation%20&%20Data%20Preparation/07.jpg)
 **Figure 3.7:** Verify that the Splunk package is suitable for installation using dpkg
  
-![Figure 3.8](Installation%20&%20Data%20Preparation/08.jpg)\
+![Figure 3.8](Installation%20&%20Data%20Preparation/08.jpg)
 **Figure 3.8:** Install Splunk Enterprise and create the administrator profile 
   
-![Figure 3.9](Installation%20&%20Data%20Preparation/09.jpg)\
+![Figure 3.9](Installation%20&%20Data%20Preparation/09.jpg)
 **Figure 3.9:** Start the Splunk service
   
-![Figure 3.10](Installation%20&%20Data%20Preparation/10.jpg)\  
+![Figure 3.10](Installation%20&%20Data%20Preparation/10.jpg)
 **Figure 3.10:** Import the BOTSv3 dataset into Splunk
  
-![Figure 3.11](Installation%20&%20Data%20Preparation/11.jpg)\
+![Figure 3.11](Installation%20&%20Data%20Preparation/11.jpg)
 **Figure 3.11:** Verify that the BOTSv3 dataset was successfully ingested 
   
-![Figure 3.12](Installation%20&%20Data%20Preparation/12.jpg)\
+![Figure 3.12](Installation%20&%20Data%20Preparation/12.jpg)
 **Figure 3.12:** Log in to Splunk and run an initial search on the BOTSv3 index
 
 ### Data Validation
@@ -316,6 +316,8 @@ The incident highlights that while logs were being collected, a lack of active a
 [9] E. D. Kilgallon, "Improving the Effectiveness of the Tier 1 Security Analyst," *SANS Reading Room*, 2020.
 
 ---
+<div class="page-break"></div>  
+
 ## Appendix A - Cryptojacking
 *(This section provides supplementary forensic analysis beyond the guided questions)*
 
@@ -354,6 +356,7 @@ earliest="08/20/2018:21:39:00"
 ![Figure 4.9.3](Quiz/Q9.3.jpg)\
 **Figure 4.9.3**
 
+<div class="page-break"></div>  
 
 ## Appendix B - Student Declaration of AI Tool Use
 
@@ -361,7 +364,7 @@ The complete Student Declaration PDF follows on the next page.
 
 [View Student Declaration PDF](./Student%20Declaration%20of%20AI%20Tool%20use%20in%20this%20Assessment.pdf)
 
-
+<div class="page-break"></div>  
 
 ## Appendix C  - GitHub Repository Availability & Incident Report
 Date of Report: 16 Feb 2026
@@ -443,13 +446,13 @@ and authorship:
 
 The CW2 folder contains three subfolders: quiz, Installation & Data Preparation, and Appendix_C. These folder stores the screenshots used as evidence for the CW2 report.
 
-![Figure c.3.2.1](Appendix_C/c.3.2.1.png)\
+![Figure c.3.2.1](Appendix_C/c.3.2.1.png)
 **Figure C.3.2.1**
 
-![Figure c.3.2.2](Appendix_C/c.3.2.2.png)\
+![Figure c.3.2.2](Appendix_C/c.3.2.2.png)
 **Figure C.3.2.2**
 
-![Figure c.3.2.3](Appendix_C/c.3.2.3.png)\
+![Figure c.3.2.3](Appendix_C/c.3.2.3.png)
 **Figure C.3.2.3**
 
 #### 3.3 CW2 Commits History
