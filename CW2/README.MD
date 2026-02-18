@@ -354,7 +354,6 @@ earliest="08/20/2018:21:39:00"
 ![Figure 4.9.3](Quiz/Q9.3.jpg)\
 **Figure 4.9.3**
 
-## Appendix B - Student Declaration of AI Tool Use
 
 ## Appendix B - Student Declaration of AI Tool Use
 
