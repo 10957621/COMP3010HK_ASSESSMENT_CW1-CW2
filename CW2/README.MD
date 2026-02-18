@@ -356,9 +356,13 @@ earliest="08/20/2018:21:39:00"
 
 ## Appendix B - Student Declaration of AI Tool Use
 
-*The complete Student Declaration PDF follows on the next page.*
-<div style="page-break-after: always;"></div>
-[Student Declaration of AI Tool use in this Assessment.pdf](./Student%20Declaration%20of%20AI%20Tool%20use%20in%20this%20Assessment.pdf)
+## Appendix B - Student Declaration of AI Tool Use
+
+The complete Student Declaration PDF follows on the next page.
+
+[View Student Declaration PDF](./Student%20Declaration%20of%20AI%20Tool%20use%20in%20this%20Assessment.pdf)
+
+
 
 ## Appendix C  - GitHub Repository Availability & Incident Report
 Date of Report: 16 Feb 2026
