@@ -426,9 +426,9 @@ This repository contains two folders corresponding to Coursework 1 and Coursewor
 *The details of CW1 follow on the next page. The evidence, such as screenshots, has already been inserted in the report and submitted in DLE previously.*
 
 **Attached Documents:**
-- 📄 [CW1 Assessment]CW2/Appendix_C/COMP3010HK_ASSESSMENT_CW1-CW2%3ACW1%20at%20main%20%C2%B7%2010957621%3ACOMP3010HK_ASSESSMENT_CW1-CW2.pdf)
-- 📄 [CW1 Evidence](CW2/Appendix_C/COMP3010HK_ASSESSMENT_CW1-CW2%3ACW1%3AEvidence%20at%20main%20%C2%B7%2010957621%3ACOMP3010HK_ASSESSMENT_CW1-CW2.pdf)
-- 📄 [CW1 Virus Total](CW2/Appendix_C/COMP3010HK_ASSESSMENT_CW1-CW2%3ACW1%3AVirus%20Total%20at%20main%20%C2%B7%2010957621%3ACOMP3010HK_ASSESSMENT_CW1-CW2.pdf)
+- 📄 [CW1 Assessment](Appendix_C/COMP3010HK_ASSESSMENT_CW1-CW2%3ACW1%20at%20main%20%C2%B7%2010957621%3ACOMP3010HK_ASSESSMENT_CW1-CW2.pdf)
+- 📄 [CW1 Evidence](Appendix_C/COMP3010HK_ASSESSMENT_CW1-CW2%3ACW1%3AEvidence%20at%20main%20%C2%B7%2010957621%3ACOMP3010HK_ASSESSMENT_CW1-CW2.pdf)
+- 📄 [CW1 Virus Total](Appendix_C/COMP3010HK_ASSESSMENT_CW1-CW2%3ACW1%3AVirus%20Total%20at%20main%20%C2%B7%2010957621%3ACOMP3010HK_ASSESSMENT_CW1-CW2.pdf)
 
 #### 3.2 CW2
 
